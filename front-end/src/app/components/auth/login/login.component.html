@@ -1,0 +1,171 @@
+<form
+  style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  "
+  [formGroup]="loginForm"
+>
+  <p-card [style]="{ width: '80vw' }">
+    <div style="text-align: center; margin-bottom: 20px">
+      <p-image
+        src="https://trainingpegasus.osmosys.co/assets/images/login_logo.png"
+        alt="Image"
+        width="250"
+      />
+    </div>
+
+    <h2
+      style="
+        text-align: center;
+        margin-bottom: 20px;
+        font-style: bold;
+        color: #222b45;
+        font: 36px;
+      "
+    >
+      Login
+    </h2>
+
+    <!-- Centered Fields Container -->
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <!-- Email Field -->
+      <div
+        class="field"
+        style="display: block; margin-bottom: 15px; width: 60%"
+      >
+        <label
+          for="email"
+          style="
+            display: block;
+            margin-bottom: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #8f9bb3;
+          "
+          >Email Address</label
+        >
+        <input
+          type="text"
+          pInputText
+          formControlName="email"
+          name="email"
+          placeholder="Email"
+          style="width: 100%"
+        />
+        <p
+          *ngIf="
+            loginForm.controls['email'].hasError('required') &&
+            loginForm.controls['email'].touched
+          "
+          class="p-error"
+        >
+          Email is required
+        </p>
+        <p
+          *ngIf="
+            loginForm.controls['email'].hasError('email') &&
+            loginForm.controls['email'].dirty
+          "
+          class="p-error"
+        >
+          Invalid email format
+        </p>
+      </div>
+
+      <!-- Password Field -->
+      <div
+        class="field"
+        style="display: block; margin-bottom: 15px; width: 60%"
+      >
+        <label
+          for="password"
+          style="
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #8f9bb3;
+            font-size: 12px;
+          "
+          >Password</label
+        >
+        <p-password
+          formControlName="password"
+          [toggleMask]="true"
+          [style]="{ width: '100%' }"
+          [inputStyle]="{ width: '100%' }"
+          placeholder="Password"
+        ></p-password>
+        <p
+          *ngIf="
+            loginForm.controls['password'].hasError('required') &&
+            loginForm.controls['password'].touched
+          "
+          class="p-error"
+        >
+          Password is required
+        </p>
+        <p
+          *ngIf="
+            loginForm.controls['password'].hasError('minlength') &&
+            loginForm.controls['password'].dirty
+          "
+          class="p-error"
+        >
+          Password must be at least 5 characters long
+        </p>
+      </div>
+
+      <!-- Remember Me Checkbox -->
+      <div
+        class="field"
+        style="
+          display: flex;
+          align-items: center;
+          margin-bottom: 20px;
+          width: 60%;
+        "
+      >
+        <p-checkbox
+          formControlName="rememberMe"
+          value="rememberMe"
+          inputId="rememberMe"
+          [style]="{ transform: 'scale(0.8)' }"
+        ></p-checkbox>
+        <label for="rememberMe" style="display: inline-block; margin-left: 8px; font-size:15px"
+          >Remember Me</label
+        >
+      </div>
+    </div>
+    <!-- Submit Button -->
+    <div style="text-align: center">
+      <p-button
+        label="SUBMIT"
+        styleClass="w-full"
+        [style]="{ width: '60%' }"
+        [disabled]="loginForm.invalid"
+      ></p-button>
+    </div>
+
+    <!-- Footer -->
+    <footer
+      style="
+        font-weight: bold;
+        color: #8f9bb3;
+        font-size: 12px;
+        text-align: center;
+        padding: 12px;
+      "
+    >
+      &copy;2015 Osmosys. All rights reserved 1.0.0.73
+    </footer>
+  </p-card>
+</form>
