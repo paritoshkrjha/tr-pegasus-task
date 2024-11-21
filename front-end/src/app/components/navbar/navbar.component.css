@@ -4,17 +4,42 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
+  height: 5rem;
   box-shadow: 0 0.5rem 1rem rgba(44, 51, 73, 0.1);
   margin: 0 auto;
   padding: 20px;
   background: #fff;
+  position: relative;
+  z-index: 1000;
 }
 
 .logo {
   font-family: "Open Sans", sans-serif;
   padding: 0 20px 0 0;
   font-size: 1.75rem;
+}
+@media (max-width: 1200px) {
+  .logo {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .logo {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .logo {
+    font-size: 0.875rem;
+  }
 }
 
 .menubar--logo {
@@ -31,5 +56,18 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
+}
+
+.sidebar--link {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 20px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+i {
   cursor: pointer;
 }

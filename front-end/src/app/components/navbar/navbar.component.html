@@ -1,6 +1,10 @@
 <header class="menubar">
   <div class="menubar--logo">
-    <i class="pi pi-bars" style="font-size: 1.75rem"></i>
+    <i
+      class="pi pi-bars"
+      style="font-size: large"
+      (click)="toggleSidebar()"
+    ></i>
     <p-divider
       layout="vertical"
       [style]="{
@@ -12,6 +16,7 @@
     </p>
   </div>
   <div class="menubar--actions">
+    @if(!isSmallScreen){
     <p-divider
       layout="vertical"
       [style]="{
@@ -19,7 +24,7 @@
       }"
     />
     <div>
-      <i class="pi pi-sign-out" style="font-size: 1.5rem"></i>
+      <i class="pi pi-sign-out" style="font-size: large" (click)="logout()"></i>
     </div>
     <p-divider
       layout="vertical"
@@ -27,10 +32,25 @@
             height: '10px',
         }"
     />
+    }
     <div class="menubar--profile-menu" (click)="menu.toggle($event)">
-      <p-avatar label="P" styleClass="mr-2" size="normal" shape="circle" />
+      <p-avatar
+        [label]="userInitials"
+        styleClass="mr-2"
+        size="normal"
+        shape="circle"
+      />
       <p>{{ userName }}</p>
-      <p-menu #menu [model]="items" [popup]="true" />
+      <p-menu #menu [model]="items" [popup]="true"></p-menu>
     </div>
   </div>
 </header>
+<div class="sidebar">
+  <p-sidebar [(visible)]="sidebarVisible" position="left">
+    <h3>Menu</h3>
+    <div class="sidebar--link">
+      <i class="pi pi-book" style="font-size: x-large"></i>
+      <a>Exams</a>
+    </div>
+  </p-sidebar>
+</div>

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
+  FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
@@ -13,36 +14,44 @@ import { ImageModule } from 'primeng/image';
 import { PasswordModule } from 'primeng/password';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../../service/auth.service';
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    CardModule,
-    InputTextModule,
-    ReactiveFormsModule,
-    CheckboxModule,
-    ButtonModule,
-    FormsModule,
-    ImageModule,
-    PasswordModule,
     CommonModule,
+    PasswordModule,
+    ImageModule,
+    ButtonModule,
+    CheckboxModule,
+    InputTextModule,
+    InputTextModule,
+    CardModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
-  loginForm: any;
+export class LoginComponent implements OnInit {
+  loginForm!: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
-  ) {
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(5)]],
-      rememberMe: [false],
+      email: [
+        '',
+        [Validators.required, Validators.email], // Email validation
+      ],
+      password: [
+        '',
+        [Validators.required, Validators.minLength(5)], // Password validation
+      ],
+      rememberMe:[false]
     });
   }
 
@@ -51,16 +60,13 @@ export class LoginComponent {
       const { email, password } = this.loginForm.value;
 
       this.authService.login(email, password).subscribe({
-        next: (response) => {
-          if (response.token) {
-            this.authService.saveToken(response.token);
-            this.router.navigate(['/home']);
-          } else {
-            console.error('Login failed', response);
-          }
+        next: (response: any) => {
+          // console.log(response);
+          this.router.navigate(['/dashboard'])
         },
         error: (error) => {
-          console.error('Error during login', error);
+          console.error('Login error:', error);
+          alert('Invalid credentials or server error');
         },
       });
     }
