@@ -8,6 +8,7 @@ import { MenuItem } from 'primeng/api';
 
 import { SidebarModule } from 'primeng/sidebar';
 import { UserService } from '../../service/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -39,7 +40,7 @@ export class NavbarComponent implements OnInit {
   sidebarVisible: boolean = false;
   isExpanded: boolean = false;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService,private router:Router) {}
 
   ngOnInit() {
     this.updateMenuItems();
@@ -104,6 +105,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
+    this.router.navigate(['/login']);
     console.log('User logged out');
   }
 }
