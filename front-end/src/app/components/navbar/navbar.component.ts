@@ -6,7 +6,8 @@ import { DividerModule } from 'primeng/divider';
 
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../service/user.service';
+
 
 @Component({
   selector: 'app-navbar',

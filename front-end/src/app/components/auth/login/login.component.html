@@ -28,7 +28,6 @@
       Login
     </h2>
 
-    <!-- Centered Fields Container -->
     <div
       style="
         display: flex;
@@ -37,7 +36,6 @@
         justify-content: center;
       "
     >
-      <!-- Email Field -->
       <div
         class="field"
         style="display: block; margin-bottom: 15px; width: 60%"
@@ -124,7 +122,6 @@
         </p>
       </div>
 
-      <!-- Remember Me Checkbox -->
       <div
         class="field"
         style="
@@ -140,7 +137,9 @@
           inputId="rememberMe"
           [style]="{ transform: 'scale(0.8)' }"
         ></p-checkbox>
-        <label for="rememberMe" style="display: inline-block; margin-left: 8px; font-size:15px"
+        <label
+          for="rememberMe"
+          style="display: inline-block; margin-left: 8px; font-size: 15px"
           >Remember Me</label
         >
       </div>
@@ -148,6 +147,7 @@
     <!-- Submit Button -->
     <div style="text-align: center">
       <p-button
+        (click)="onSubmit()"
         label="SUBMIT"
         styleClass="w-full"
         [style]="{ width: '60%' }"
