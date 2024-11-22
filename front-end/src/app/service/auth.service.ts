@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { UserService } from './user.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,11 +13,12 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
+    private router: Router,
     private userService: UserService
   ) {}
 
   login(email: string, password: string): Observable<any> {
-    return   this.http.post(this.apiUrl+'/login',{ email: email, password:password });
+    return  this.http.post(this.apiUrl+'/login',{ email: email, password:password });
   }
 
   saveToken(token: string): void {
@@ -30,4 +32,11 @@ export class AuthService {
   isAuthenticated(): boolean {
     return this.getToken() !== null;
   }
+  logout(): void {
+    sessionStorage.removeItem('user');
+    this.router.navigate(['/login'], {
+      replaceUrl: true,
+    });
+  }
+  
 }

@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { TableComponent } from "./components/table/table.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, TableComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -15,7 +16,6 @@ export class AppComponent {
 
   constructor(private http: HttpClient) {}
   ngOnInit(): void {
-    // Directly call the API and log users
     this.http.get(this.apiUrl).subscribe({
       next: (response: any) => {
         console.log('Users from API:', response.users);

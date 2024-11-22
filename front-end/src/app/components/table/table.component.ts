@@ -4,6 +4,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
+import { UserService } from '../../service/user.service';
 @Component({
   selector: 'app-table',
   standalone: true,
@@ -14,7 +15,7 @@ import { DialogModule } from 'primeng/dialog';
 export class TableComponent implements OnInit {
   exams: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private user: UserService) {}
 
   ngOnInit(): void {
     this.fetchExamsData(); 
@@ -36,8 +37,11 @@ export class TableComponent implements OnInit {
       headers: { "ngrok-skip-browser-warning": "69420" }
     }).subscribe({
       next: (data) => {
+        const id = this.user.user?.uid;
         if (data.exams && Array.isArray(data.exams)) {
-          this.exams = data.exams; 
+          console.log('Exam data fetched:', data.exams);
+          const exams = data.exams.filter((exam: any) => exam.userId === id);
+          this.exams = exams; 
           console.log('Exam data fetched:', this.exams);
         } else {
           console.error('Expected exams array, but received:', data);
@@ -47,6 +51,5 @@ export class TableComponent implements OnInit {
         console.error('Error fetching exam data:', err);
       },
     });
-    
   }
 }

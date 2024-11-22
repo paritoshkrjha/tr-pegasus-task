@@ -15,6 +15,7 @@ import { PasswordModule } from 'primeng/password';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth.service';
+import { UserService } from '../../../service/user.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -38,7 +39,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -62,6 +64,8 @@ export class LoginComponent implements OnInit {
       this.authService.login(email, password).subscribe({
         next: (response: any) => {
           // console.log(response);
+          this.userService.user=response.user;
+          this.userService.saveUserToSessionStorage(response.user);
           this.router.navigate(['/dashboard'])
         },
         error: (error) => {

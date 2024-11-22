@@ -13,7 +13,14 @@ export interface User {
 })
 export class UserService {
   user: User | null = null;
-  constructor(private http: HttpClient) {}
-
-  fetchUserData() {}
+  constructor(private http: HttpClient) {
+    const user = sessionStorage.getItem('user');
+    if (user) {
+      this.user = JSON.parse(user);
+    }
+  }
+ 
+  saveUserToSessionStorage(user: User) {
+    sessionStorage.setItem('user', JSON.stringify(user));
+  }
 }

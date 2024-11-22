@@ -42,3 +42,10 @@
   background-color: #f4f4f4;
   text-align: left;
 }
+
+.no-exams{
+  text-align: center;
+  font-size: 20px;
+  color: #333;
+  margin-top: 20px;
+}
