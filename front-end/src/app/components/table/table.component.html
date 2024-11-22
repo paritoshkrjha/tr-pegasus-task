@@ -1,0 +1,104 @@
+<div class="card flex justify-content-center">
+  <p-table
+    [value]="exams"
+    [rows]="5"
+    [paginator]="true"
+    [showCurrentPageReport]="true"
+    [resizableColumns]="true"
+    [sortMode]="'single'"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
+    styleClass="custom-table"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="examName">Exam Name <p-sortIcon field="examName"></p-sortIcon></th>
+        <th pSortableColumn="duration">Exam Duration <p-sortIcon field="duration"></p-sortIcon></th>
+        <th pSortableColumn="numberOfQuestions">Number of Questions <p-sortIcon field="numberOfQuestions"></p-sortIcon></th>
+        <th pSortableColumn="examStartDate">Exam Start Date <p-sortIcon field="examStartDate"></p-sortIcon></th>
+        <th pSortableColumn="examEndDate">Exam End Date <p-sortIcon field="examEndDate"></p-sortIcon></th>
+        <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+        <th>Show Result</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-exam>
+      <tr>
+        <td>{{ exam.examName }}</td>
+        <td>{{ exam.duration }}</td>
+        <td>{{ exam.numberOfQuestions }}</td>
+        <td>{{ exam.examStartDate | date: 'dd-MMM-yyyy HH:mm' }}</td>
+        <td>{{ exam.examEndDate | date: 'dd-MMM-yyyy HH:mm' }}</td>
+        <td>
+          <span
+            [ngClass]="{
+              'status-completed': exam.status === 'Complete',
+              'status-pending': exam.status !== 'Complete'
+            }"
+          >
+            {{ exam.status }}
+          </span>
+        </td>
+        <!-- Eye button for Show Result -->
+        <td>
+          <button
+            pButton
+            type="button"
+            icon="pi pi-eye"
+            class="p-button-text"
+            (click)="showDialog(exam)"
+          ></button>
+        </td>
+        <!-- Start Exam button -->
+        <td>
+          <button
+            pButton
+            type="button"
+            label="Start Exam"
+            [disabled]="exam.status === 'Complete'"
+            class="p-button-primary"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <!-- Dialog for Exam Details -->
+  <p-dialog
+    header="Exam Result"
+    [(visible)]="visible"
+    [modal]="true"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [style]="{ width: '50vw' }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+    <div *ngIf="selectedExam">
+      <table class="result-table">
+      
+        <tbody>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><strong>Exam Name</strong></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ selectedExam.examName }}</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><strong>Pass Percentage</strong></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ selectedExam.passPercentage }}%</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><strong>Total Marks Scored</strong></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ selectedExam.obtainedMarks }}</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><strong>Qualify Status</strong></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">
+              <span [ngStyle]="{ color: selectedExam.qualifyStatus === 'Pass' ? 'green' : 'red' }">
+              {{ selectedExam.qualifyStatus }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </p-dialog>
+</div>

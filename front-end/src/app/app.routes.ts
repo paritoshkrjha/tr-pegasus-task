@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/auth/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { TableComponent } from './components/table/table.component';
 
 export const routes: Routes = [
   //   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -9,4 +10,8 @@ export const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
   },
+  {
+    path: 'table',
+    component: TableComponent,
+  }
 ];

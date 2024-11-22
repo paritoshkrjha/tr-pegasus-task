@@ -1,0 +1,44 @@
+.custom-table {
+  font-size: 14px;
+  color: #333;
+}
+
+.p-sortable-column {
+  color: #000;
+  font-weight: bold;
+}
+
+.p-sortable-column:hover {
+  text-decoration: underline;
+}
+
+.status-completed {
+  color: green;
+  font-weight: bold;
+}
+
+.status-pending {
+  color: orange;
+  font-weight: bold;
+}
+
+.p-button-text {
+  font-size: 14px;
+  color: #007ad9;
+  padding: 0.5em 1em;
+}
+.result-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.result-table th,
+.result-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.result-table th {
+  background-color: #f4f4f4;
+  text-align: left;
+}
