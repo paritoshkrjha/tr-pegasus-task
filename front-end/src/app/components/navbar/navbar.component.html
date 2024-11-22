@@ -1,0 +1,36 @@
+<header class="menubar">
+  <div class="menubar--logo">
+    <i class="pi pi-bars" style="font-size: 1.75rem"></i>
+    <p-divider
+      layout="vertical"
+      [style]="{
+            height: '20px',
+        }"
+    />
+    <p>
+      <a class="logo">Training Pegasus</a>
+    </p>
+  </div>
+  <div class="menubar--actions">
+    <p-divider
+      layout="vertical"
+      [style]="{
+          height: '10px',
+      }"
+    />
+    <div>
+      <i class="pi pi-sign-out" style="font-size: 1.5rem"></i>
+    </div>
+    <p-divider
+      layout="vertical"
+      [style]="{
+            height: '10px',
+        }"
+    />
+    <div class="menubar--profile-menu" (click)="menu.toggle($event)">
+      <p-avatar label="P" styleClass="mr-2" size="normal" shape="circle" />
+      <p>{{ userName }}</p>
+      <p-menu #menu [model]="items" [popup]="true" />
+    </div>
+  </div>
+</header>

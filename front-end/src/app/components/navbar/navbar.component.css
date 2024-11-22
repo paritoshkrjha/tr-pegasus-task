@@ -1,0 +1,35 @@
+.menubar {
+  width: 100%;
+  max-width: 1920px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  box-shadow: 0 0.5rem 1rem rgba(44, 51, 73, 0.1);
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+}
+
+.logo {
+  font-family: "Open Sans", sans-serif;
+  padding: 0 20px 0 0;
+  font-size: 1.75rem;
+}
+
+.menubar--logo {
+  display: flex;
+  align-items: center;
+}
+
+.menubar--actions {
+  display: flex;
+  align-items: center;
+}
+
+.menubar--profile-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
